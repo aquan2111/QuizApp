@@ -1,0 +1,22 @@
+﻿@page
+@model QuizApp.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container mt-5">
+
+    <!-- Hero Section -->
+    <div class="hero-section text-center p-5 shadow rounded bg-light">
+        <img src="https://cdn-icons-png.flaticon.com/512/4144/4144785.png" alt="Quiz Icon" width="100" class="mb-3">
+        <h1 class="display-4">Welcome to QuizApp</h1>
+        <p class="lead">Challenge yourself with exciting quizzes and track your progress.</p>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="text-center mt-4">
+        <a asp-page="/Quizzes/Index" class="btn btn-primary btn-lg mx-2">Start a Quiz</a>
+        <a asp-page="/Questions/Index" class="btn btn-secondary btn-lg mx-2">Manage Questions</a>
+    </div>
+
+</div>

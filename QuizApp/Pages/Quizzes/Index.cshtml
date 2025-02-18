@@ -1,0 +1,44 @@
+﻿@page
+@model QuizApp.Pages.Quizzes.IndexModel
+@{
+    ViewData["Title"] = "Quizzes";
+}
+
+<h2>Quizzes</h2>
+
+<!-- Button to Add a New Quiz -->
+<a asp-page="/Quizzes/Create" class="btn btn-success mb-3">Add New Quiz</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var quiz in Model.Quizzes)
+        {
+            <tr>
+                <td>@quiz.Title</td>
+                <td>
+                    <!-- Take Quiz Button -->
+                    <a asp-page="/Quizzes/TakeQuiz" asp-route-id="@quiz.Id" class="btn btn-primary">Take Quiz</a>
+
+                    <!-- View Scores Button -->
+                    <a asp-page="/Quizzes/ScoreQuiz" asp-route-quizId="@quiz.Id" class="btn btn-info">View Scores</a>
+
+                    <!-- Edit Button -->
+                    <a asp-page="/Quizzes/Edit" asp-route-id="@quiz.Id" class="btn btn-warning">Edit</a>
+
+                    <!-- Delete Button (No Separate Delete Page) -->
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@quiz.Id" class="d-inline">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this quiz?');">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

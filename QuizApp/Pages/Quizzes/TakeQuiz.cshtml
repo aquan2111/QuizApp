@@ -1,0 +1,24 @@
+﻿@page
+@model QuizApp.Pages.Quizzes.TakeQuizModel
+@{
+    ViewData["Title"] = "Take Quiz";
+}
+
+<h2>@Model.Quiz.Title</h2>
+
+<form method="post">
+    @foreach (var quizQuestion in Model.Quiz.QuizQuestions)
+    {
+        <div class="form-group">
+            <label>@quizQuestion.Question.Text</label>
+            @foreach (var option in Model.ShuffledOptions[quizQuestion.Question.Id])
+            {
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" name="UserAnswers[@quizQuestion.Question.Id]" value="@option.OptionValue">
+                    <label class="form-check-label">@option.OptionText</label>
+                </div>
+            }
+        </div>
+    }
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

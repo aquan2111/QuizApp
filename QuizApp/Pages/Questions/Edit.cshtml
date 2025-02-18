@@ -1,0 +1,33 @@
+﻿@page
+@model QuizApp.Pages.Questions.EditModel
+@{
+    ViewData["Title"] = "Edit Question";
+}
+
+<h2>Edit Question</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="Question.Id" />
+    <div class="form-group">
+        <label>Question Text</label>
+        <input asp-for="Question.Text" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label>Option A (Correct Answer)</label>
+        <input asp-for="Question.OptionA" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label>Option B</label>
+        <input asp-for="Question.OptionB" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label>Option C</label>
+        <input asp-for="Question.OptionC" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label>Option D</label>
+        <input asp-for="Question.OptionD" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-success">Save Changes</button>
+    <a asp-page="Index" class="btn btn-secondary">Cancel</a>
+</form>

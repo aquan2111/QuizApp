@@ -1,0 +1,39 @@
+﻿@page
+@model QuizApp.Pages.Questions.IndexModel
+@{
+    ViewData["Title"] = "Manage Questions";
+}
+
+<h2>Manage Questions</h2>
+<a asp-page="Create" class="btn btn-primary">Add New Question</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Question</th>
+            <th>Option A (Correct)</th>
+            <th>Option B</th>
+            <th>Option C</th>
+            <th>Option D</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var question in Model.Questions)
+        {
+            <tr>
+                <td>@question.Text</td>
+                <td>@question.OptionA</td>
+                <td>@question.OptionB</td>
+                <td>@question.OptionC</td>
+                <td>@question.OptionD</td>
+                <td>
+                    <a asp-page="Edit" asp-route-id="@question.Id" class="btn btn-warning">Edit</a>
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@question.Id" style="display:inline;">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

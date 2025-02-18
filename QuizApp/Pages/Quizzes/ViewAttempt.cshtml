@@ -1,0 +1,46 @@
+﻿@page "{attemptId:int}"
+@model QuizApp.Pages.Quizzes.ViewAttemptModel
+@using QuizApp.Models
+@{
+    ViewData["Title"] = "View Quiz Attempt";
+
+    // Function to convert "A", "B", "C", "D" to actual answer text
+    string GetAnswerText(Question question, string selectedOption)
+    {
+        return selectedOption switch
+        {
+            "A" => question.OptionA,
+            "B" => question.OptionB,
+            "C" => question.OptionC,
+            "D" => question.OptionD,
+            _ => "Invalid Answer"
+        };
+    }
+}
+
+<h2>Attempt Details for @Model.Quiz.Title</h2>
+<p><strong>Attempt Date:</strong> @Model.Attempt.AttemptDate.ToString("dd/MM/yyyy hh:mm tt")</p>
+<p><strong>Score:</strong> @Model.Attempt.Score / @Model.Attempt.TotalQuestions</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Question</th>
+            <th>Your Answer</th>
+            <th>Correct Answer</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var entry in Model.Attempt.Answers)
+        {
+            var isCorrect = @GetAnswerText(entry.Question, entry.UserAnswer) == entry.Question.CorrectAnswer;
+            <tr class="@(isCorrect ? "table-success" : "table-danger")">
+                <td>@entry.Question.Text</td>
+                <td>@GetAnswerText(entry.Question, entry.UserAnswer)</td>
+                <td>@entry.Question.CorrectAnswer</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-page="ScoreQuiz" asp-route-quizId="@Model.Quiz.Id" class="btn btn-secondary">Back</a>

@@ -1,0 +1,41 @@
+﻿@page
+@model QuizApp.Pages.Quizzes.ScoreQuizModel
+@{
+    ViewData["Title"] = "Quiz Attempts";
+}
+
+<h2>Quiz Attempts for @Model.Quiz.Title</h2>
+
+@if (Model.QuizAttempts.Count == 0)
+{
+    <p class="text-warning">No attempts found for this quiz.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Attempt Date</th>
+                <th>Score</th>
+                <th>Total Questions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var attempt in Model.QuizAttempts)
+            {
+                <tr>
+                    <td>@attempt.AttemptDate.ToLocalTime().ToString("g")</td>
+                    <td>@attempt.Score</td>
+                    <td>@attempt.TotalQuestions</td>
+                    <td>
+                        <a asp-page="ViewAttempt" asp-route-attemptId="@attempt.Id" class="btn btn-info btn-sm">
+                            View
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<a asp-page="/Quizzes/Index" class="btn btn-primary">Back to Quizzes</a>
